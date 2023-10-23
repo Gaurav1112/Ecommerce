@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Category</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Create Category</h1>
+    <form th:action="@{/category/create}" method="post">
+        <div class="form-group">
+            <label for="name">Category Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="parentCategory">Parent Category:</label>
+            <select class="form-control" id="parentCategory" name="parentCategory">
+                <option value="">None</option>
+                <!-- Iterate through a list of categories if needed -->
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>

@@ -18,6 +18,7 @@
                     <h5 class="card-title" th:text="${product.name}">Product Title</h5>
                     <p class="card-text" th:text="${product.description}">Product Description.</p>
                     <p class="card-text" th:text="'Price: $' + ${product.price}">Price</p>
+                    <p class="card-text" th:text="'Category: $' + ${product.category.name}">Category</p>
                     <a th:href="@{'/buy/' + ${product.id}}" class="btn btn-primary">Buy Now</a>
                     <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-secondary">Add to Cart</a>
                 </div>
