@@ -23,9 +23,16 @@ public class ProductController {
         model.addAttribute("products", products);
         return "list";
     }
-    @PostMapping
-    public Product createProduct(@RequestBody Product product){
-        return productService.createProduct(product);
+    @GetMapping("/create")
+    public String showCreateProductForm(Model model){
+        model.addAttribute("product", new Product());
+        return "createProduct";
+    }
+    @PostMapping("/create")
+    public String createProduct(@ModelAttribute("product") Product product){
+
+        productService.createProduct(product);
+        return "redirect:/product/get";
     }
 
     @GetMapping("/{id}")
