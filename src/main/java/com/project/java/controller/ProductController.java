@@ -21,10 +21,14 @@ public class ProductController {
     private CategoryService categoryService;
 
     @GetMapping("/get")
-    public String getAllProducts(Model model){
+    public String getAllProducts(Model model, @RequestParam(value="welocmeMessage", required=false) String welcomeMessage){
+       if(welcomeMessage == null){
+          welcomeMessage="Welcome to our Ecommerce Store";
+       }
         List<Product> products= productService.getAllProducts();
         model.addAttribute("products", products);
         model.addAttribute("categories",categoryService.getAllCategory());
+        model.addAttribute("welcomeMessage", welcomeMessage);
         return "list";
     }
     @GetMapping("/create")
