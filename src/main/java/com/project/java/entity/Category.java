@@ -1,5 +1,6 @@
 package com.project.java.entity;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="category")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

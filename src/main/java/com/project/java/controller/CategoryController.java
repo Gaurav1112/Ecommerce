@@ -31,6 +31,12 @@ public class CategoryController {
         return "categories";
     }
 
+    @GetMapping("/getCategories")
+    public List<Category> getCategories(){
+        List<Category> categories = categoryService.getAllCategory();
+        return categories;
+    }
+
     @PostMapping("/create")
     public String createCategory(@ModelAttribute("category") Category category){
         categoryService.saveCategory(category);

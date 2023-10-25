@@ -1,5 +1,6 @@
 package com.project.java.entity;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name="product")
 @ToString
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +21,8 @@ public class Product {
     private String description;
     private double price;
     private int quantity;
+
     @ManyToOne
+    @JoinColumn(name="category_id")
     private Category category;
 }

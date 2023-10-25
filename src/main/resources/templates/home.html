@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <title>Click it, See it and Buy it</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<header class="bg-dark text-white py-4">
+    <div class="container">
+        <h1>Namma Mart</h1>
+    </div>
+</header>
+
+<main class="container mt-4">
+    <div class="row">
+        <aside class="col-md-3">
+            <h4>Categories</h4>
+            <ul class="categoryList">
+                <li th:each="category : ${categories}" class="list-group-item">
+                    <a class= "category-link" href="#" th:text="${category.name}" onclick="loadProducts('${category.name}')"></a>
+                </li>
+            </ul>
+        </aside>
+
+        <section class="col-md-9">
+            <h2 > </h2>
+            <div class="row" id="productList">
+
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="bg-dark text-white py-4 mt-4">
+    <div class="container">
+        <p>&copy; Namma Mart</p>
+    </div>
+</footer>
+
+<!-- JavaScript to load products based on the selected category -->
+<script>
+
+$(document).ready(function() {
+var listHtmlPath='product/get';
+$('#productList').load(listHtmlPath);
+});
+
+ document.addEventListener('DOMContentLoaded', function() {
+    const categoryLinks = document.querySelectorAll('.category-link');
+    categoryLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+
+            // Extract the category name from the anchor's text content
+            const categoryName = link.textContent;
+
+            // Construct the URL with the category name and navigate to it
+            const url = `/product/category/${encodeURIComponent(categoryName)}`;
+            $('#productList').load(url);
+        });
+    });
+});
+
+</script>
+</body>
+</html>

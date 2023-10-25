@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -49,4 +48,12 @@ public class ProductServiceImpl implements ProductService {
         }
         return productRepository.save(product);
     }
+
+    @Override
+    public List<Product> getProductByCategoryName(String categoryName) {
+        List<Product> products = productRepository.findByCategoryName(categoryName);
+        return products;
+    }
+
+
 }

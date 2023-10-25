@@ -1,5 +1,6 @@
 package com.project.java.controller;
 
+import com.project.java.entity.Category;
 import com.project.java.service.CategoryService;
 import com.project.java.service.ProductService;
 import com.project.java.entity.Product;
@@ -31,6 +32,12 @@ public class ProductController {
         model.addAttribute("welcomeMessage", welcomeMessage);
         return "list";
     }
+
+    @GetMapping("/getProducts")
+    public List<Product> getProducts(Model model, @RequestParam(value="welocmeMessage", required=false) String welcomeMessage){
+       List<Product> products = productService.getAllProducts();
+        return products;
+    }
     @GetMapping("/create")
     public String showCreateProductForm(Model model){
         model.addAttribute("product", new Product());
@@ -49,5 +56,15 @@ public class ProductController {
         Product product = productService.getProductById(id);
         model.addAttribute("product",product);
         return "productDescription";
+    }
+
+
+    @GetMapping("/category/{categoryName}")
+    @CrossOrigin(origins = "http://localhost:8080")
+    public String getProduct(@PathVariable(value = "categoryName") String categoryName, Model model){
+        List<Product> products = productService.getProductByCategoryName(categoryName);
+        model.addAttribute("products",products);
+        model.addAttribute("categoryName", categoryName);
+        return "list";
     }
 }
